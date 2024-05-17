@@ -20,5 +20,11 @@
 	    document.title = "B.C. StockS";
 	}
 	</script>
-	
+	<script>
+        if ('serviceWorker' in navigator) {
+        	window.addEventListener('load', function () {
+        		navigator.serviceWorker.register('/sw.js?v=3');
+        	});
+        }
+    </script>
 </body>
