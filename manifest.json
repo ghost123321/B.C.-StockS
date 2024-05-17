@@ -1,0 +1,31 @@
+{
+  "background_color": "#473f6d",
+  "dir": "ltr",
+  "display": "fullscreen",
+  "name": "B.C. StockS",
+  "orientation": "any",
+  "scope": "https://bcstocks.online/?page=mainpage",
+  "short_name": "B.C. StockS",
+  "start_url": "https://bcstocks.online/?page=mainpage",
+  "theme_color": "#240a6b",
+  "icons": [
+    {
+      "src": "https://github.com/ghost123321/B.C.-StockS/blob/main/favicon.png?raw=true",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/favicon.ico",
+      "type": "image/x-icon"
+    }
+  ],
+  "id": "bc1250stcks253983",
+  "description": "B.C. stocks tracker app",
+  "lang": "tr",
+  "categories": [
+    "finance"
+  ],
+  "display_override": [
+    "window-controls-overlay"
+  ]
+}
