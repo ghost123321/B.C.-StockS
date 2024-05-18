@@ -4,7 +4,7 @@
   "display": "standalone",
   "name": "B.C. StockS",
   "orientation": "any",
-  "scope": "https://bcstocks.online",
+  "scope": "https://bcstocks.online/",
   "short_name": "B.C. StockS",
   "start_url": "https://bcstocks.online",
   "theme_color": "#464661",
