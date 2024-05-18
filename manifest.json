@@ -4,7 +4,7 @@
   "name": "B.C. StockS",
   "orientation": "portrait",
   "short_name": "B.C. StockS",
-  "start_url": "/",
+  "start_url": "./",
   "theme_color": "#464661",
   "icons": [
     {
