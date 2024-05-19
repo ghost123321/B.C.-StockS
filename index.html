@@ -62,6 +62,13 @@
         height: 100%;
         border: none;
         visibility: hidden;
+        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
     }
     .iframe.loaded {
         visibility: visible;
@@ -74,10 +81,9 @@
     <div class="spinner"></div>
 </div>
 <div class="iframe-container">
-    <iframe class="iframe" src="about:blank" frameborder="0" allowfullscreen></iframe>
+    <iframe class="iframe" src="https://script.google.com/macros/s/AKfycbz5jTyvZe150vnufMAapW3VaTy32FqAJV6yfF_3bAXoTQSrNlDvyM9gIgTgkwjPt4tYAw/exec" frameborder="0" allowfullscreen></iframe>
 </div>
 <script>
-    document.querySelector('.iframe').src = "https://script.google.com/macros/s/AKfycbz5jTyvZe150vnufMAapW3VaTy32FqAJV6yfF_3bAXoTQSrNlDvyM9gIgTgkwjPt4tYAw/exec";
     document.querySelector('.iframe').addEventListener('load', function() {
         document.querySelector('.loading-container').style.display = 'none';
         document.querySelector('.iframe-container').style.display = 'block';
