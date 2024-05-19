@@ -28,9 +28,10 @@
         z-index: 9999;
     }
     .logo {
-        width: 100px;
-        height: 100px;
+        width: 150px; /* Logo boyutu %50 büyütüldü */
+        height: 150px; /* Logo boyutu %50 büyütüldü */
         animation: pulse 1s infinite alternate;
+        transform: scale(1.5); /* Yeni: Logo %50 büyütüldü */
     }
     @keyframes pulse {
         from { transform: scale(1); }
@@ -73,9 +74,10 @@
     <div class="spinner"></div>
 </div>
 <div class="iframe-container">
-    <iframe class="iframe" src="https://script.google.com/macros/s/AKfycbz5jTyvZe150vnufMAapW3VaTy32FqAJV6yfF_3bAXoTQSrNlDvyM9gIgTgkwjPt4tYAw/exec" frameborder="0" allowfullscreen></iframe>
+    <iframe class="iframe" src="about:blank" frameborder="0" allowfullscreen></iframe>
 </div>
 <script>
+    document.querySelector('.iframe').src = "https://script.google.com/macros/s/AKfycbz5jTyvZe150vnufMAapW3VaTy32FqAJV6yfF_3bAXoTQSrNlDvyM9gIgTgkwjPt4tYAw/exec";
     document.querySelector('.iframe').addEventListener('load', function() {
         document.querySelector('.loading-container').style.display = 'none';
         document.querySelector('.iframe-container').style.display = 'block';
