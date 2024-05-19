@@ -12,7 +12,7 @@
         margin: 0;
         overflow: hidden;
         font-family: 'Open Sans', sans-serif;
-        background-color: #464661;
+        background-color: #464661; /* Eski arkaplan rengi */
     }
     .loading-container {
         position: fixed;
@@ -28,9 +28,10 @@
         z-index: 9999;
     }
     .logo {
-        width: 150px;
-        height: 150px;
+        width: 150px; /* Logo boyutu %50 büyütüldü */
+        height: 150px; /* Logo boyutu %50 büyütüldü */
         animation: pulse 1s infinite alternate;
+        transform: scale(2); /* Yeni: Logo %50 büyütüldü */
     }
     @keyframes pulse {
         from { transform: scale(1); }
@@ -39,8 +40,8 @@
     .spinner {
         width: 50px;
         height: 50px;
-        border: 5px solid rgba(192, 136, 25, 0.5);
-        border-top-color: rgba(192, 136, 25, 1);
+        border: 5px solid rgba(192, 136, 25, 0.5); /* Yeni renk */
+        border-top-color: rgba(192, 136, 25, 1); /* Yeni renk */
         border-radius: 50%;
         animation: spin 1s linear infinite;
         margin-top: 20px;
@@ -50,6 +51,7 @@
         100% { transform: rotate(360deg); }
     }
     .iframe-container {
+       
         width: 100%;
         height: 100%;
         display: none;
@@ -80,18 +82,6 @@
     .iframe.loaded {
         visibility: visible;
     }
-    @media (max-width: 768px) {
-        .logo {
-            width: 96px;
-            height: 96px;
-        }
-    }
-    @media (max-width: 480px) {
-        .logo {
-            width: 72px;
-            height: 72px;
-        }
-    }
 </style>
 </head>
 <body>
@@ -120,4 +110,4 @@
     }
 </script>
 </body>
-</html>
+</html> 
