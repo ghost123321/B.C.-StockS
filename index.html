@@ -31,30 +31,30 @@
         width: 200px;
         height: 200px;
         animation: pulse 1s infinite alternate;
-        transform: scale(1.1);
+        transform: scale(0.5);
         z-index: 1;
     }
     @keyframes pulse {
-        from { transform: scale(1.0); }
+        from { transform: scale(1.1); }
         to { transform: scale(1.7); }
-       
     }
     .spinner {
         width: 20em;
         height: 20em;
-        border-top: 3em solid #010d21;
-        border-right: 3em solid transparent;
-        animation: spinner 1s linear infinite;
+        border-top: 2.5em solid #010d21;
+        border-right: 2.5em solid transparent;
+        animation: spinner 3s linear infinite;
         border-radius: 200%;
         position: absolute;
     }
     .head {
-        width: 3em;
-        height: 3em;
-        border-radius: 45%;
-        margin-left: 17em;
-        margin-top:-0.2em;
+        width: 2.7em;
+        height: 2.7em;
+        border-radius: 40%;
+        margin-left: 16.5em;
+        margin-top: -0.0em;
         background-color: #e09f1d;
+        
     }
     @keyframes spinner {
         to {
@@ -66,10 +66,7 @@
         height: 100%;
         display: none;
         border: none;
-        visibility: hidden;
         overflow: hidden;
-        overflow-x: hidden;
-        overflow-y: hidden;
         top: 0;
         left: 0;
         right: 0;
@@ -80,17 +77,15 @@
         width: 100%;
         height: 100%;
         border: none;
-        visibility: hidden;
-        overflow: hidden;
-        overflow-x: hidden;
-        overflow-y: hidden;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        opacity: 0;
+        transform: scale(0.95);
+        filter: blur(5px);
+        transition: opacity 1s ease, transform 1s ease, filter 1s ease;
     }
     .iframe.loaded {
-        visibility: visible;
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
     }
 </style>
 </head>
@@ -106,9 +101,15 @@
 </div>
 <script>
     document.querySelector('.iframe').addEventListener('load', function() {
-        document.querySelector('.loading-container').style.display = 'none';
-        document.querySelector('.iframe-container').style.display = 'block';
-        this.classList.add('loaded');
+        
+        setTimeout(() => {
+            document.querySelector('.loading-container').style.display = 'none';
+        	document.querySelector('.iframe-container').style.display = 'block';
+        }, 250); 
+        
+        setTimeout(() => {
+            this.classList.add('loaded');
+        }, 300); // küçük bir gecikme ekliyoruz ki CSS geçişi düzgün çalışsın
     });
 </script>
 <script>
