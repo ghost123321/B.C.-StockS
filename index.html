@@ -1,36 +1,97 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <base target="_top">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title> B.C. StockS </title>
-	
- <link rel="shortcut icon" href="https://github.com/ghost123321/B.C.-StockS/blob/main/favicon.png?raw=true" type="image/x-icon" />
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap"
-    rel="stylesheet"
-  />
-	<link rel="manifest" href="./manifest.json" />
-	
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B.C. StockS</title>
+<link rel="shortcut icon" href="https://github.com/ghost123321/B.C.-StockS/blob/main/favicon.png?raw=true" type="image/x-icon" />
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet">
+<link rel="manifest" href="./manifest.json" />
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        font-family: 'Open Sans', sans-serif;
+        background-color: #464661; /* Eski arkaplan rengi */
+    }
+    .loading-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+    .logo {
+        width: 150px; /* Logo boyutu %50 büyütüldü */
+        height: 150px; /* Logo boyutu %50 büyütüldü */
+        animation: pulse 1s infinite alternate;
+        transform: scale(1.5); /* Yeni: Logo %50 büyütüldü */
+    }
+    @keyframes pulse {
+        from { transform: scale(1); }
+        to { transform: scale(1.2); }
+    }
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(192, 136, 25, 0.5); /* Yeni renk */
+        border-top-color: rgba(192, 136, 25, 1); /* Yeni renk */
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-top: 20px;
+    }
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    .iframe-container {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        display: none;
+    }
+    .iframe {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: none;
+        visibility: hidden;
+    }
+    .iframe.loaded {
+        visibility: visible;
+    }
+</style>
 </head>
-	<style>
-		.iframe {
-                  background-color:#464661;
-		}
-	</style>
 <body>
-	 <iframe class="iframe" src="https://script.google.com/macros/s/AKfycbz5jTyvZe150vnufMAapW3VaTy32FqAJV6yfF_3bAXoTQSrNlDvyM9gIgTgkwjPt4tYAw/exec" frameborder="0" style= "overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0%;left:0px;right:0px;bottom:0px" style="visibility:hidden;" onload="this.style.visibility='visible';" height="100%" width="100%"></iframe>
-	
-	<script>
-	function changeTabTitle() {
-	    document.title = "B.C. StockS";
-	}
-	</script>
-	<script>
-        if ('serviceWorker' in navigator) {
-        	window.addEventListener('load', function () {
-        		navigator.serviceWorker.register('/sw.js?v=3');
-        	});
-        }
-    </script>
+<div class="loading-container">
+    <img class="logo" src="https://github.com/ghost123321/B.C.-StockS/blob/main/favicon.png?raw=true" alt="Logo">
+    <div class="spinner"></div>
+</div>
+<div class="iframe-container">
+    <iframe class="iframe" src="https://script.google.com/macros/s/AKfycbz5jTyvZe150vnufMAapW3VaTy32FqAJV6yfF_3bAXoTQSrNlDvyM9gIgTgkwjPt4tYAw/exec" frameborder="0" allowfullscreen></iframe>
+</div>
+<script>
+    document.querySelector('.iframe').addEventListener('load', function() {
+        document.querySelector('.loading-container').style.display = 'none';
+        document.querySelector('.iframe-container').style.display = 'block';
+        this.classList.add('loaded');
+    });
+</script>
+<script>
+    document.title = "B.C. StockS";
+</script>
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function () {
+            navigator.serviceWorker.register('/sw.js?v=3');
+        });
+    }
+</script>
 </body>
+</html>
