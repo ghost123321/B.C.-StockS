@@ -4,9 +4,9 @@
   "display": "standalone",
   "name": "B.C. StockS",
   "orientation": "portrait",
-  "scope": "./index.html?page=loginpage",
+  "scope": "https://bcstocks.online?page=loginpage/",
   "short_name": "B.C. StockS",
-  "start_url": "./index.html",
+  "start_url": "https://bcstocks.online/",
   "theme_color": "#2a2b38",
   "icons": [
     {
@@ -27,12 +27,10 @@
   ],
   "display_override": [
     "window-controls-overlay",
-    "standalone",
+    
     "fullscreen"
   ],
   "prefer_related_applications": false,
-  "iarc_rating_id": "10253983",
-  "edge_side_panel": {
-    "preferred_width": 0
-  }
+  "iarc_rating_id": "10253983"
+  
 }
