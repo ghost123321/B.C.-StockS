@@ -69,7 +69,7 @@
 </style>
 </head>
 <body>
-    <script src="./theme.js"></script>
+    
 <div class="loading-container"> 
     <img class="logo" src="./favicon.png" alt="Logo">
 </div>
@@ -83,10 +83,24 @@
         document.querySelector('.loading-container').style.display = 'none';
         document.querySelector('.iframe-container').style.display = 'block';
        
-        setTimeout(() => {
-            
-            this.classList.add('loaded');
-        }, 100); // küçük bir gecikme ekliyoruz ki CSS geçişi düzgün çalışsın
+
+  setTimeout(() => {
+    this.classList.add('loaded');
+    changeThemeColor('#464661); // Örnek olarak tema rengini turuncu yapalım
+  }, 100);       
+
+function changeThemeColor(color) {
+  let themeMetaTag = document.querySelector('meta[name="theme-color"]');
+  if (themeMetaTag) {
+    themeMetaTag.setAttribute('content', color);
+  } else {
+    // Eğer meta etiketi yoksa, yeni bir tane oluşturabiliriz
+    themeMetaTag = document.createElement('meta');
+    themeMetaTag.setAttribute('name', 'theme-color');
+    themeMetaTag.setAttribute('content', color);
+    document.head.appendChild(themeMetaTag);
+  }
+}
         
     });
 </script>
@@ -100,5 +114,6 @@
         });
     }
 </script>
+    <script src="./theme.js"></script>
 </body>
 </html>
