@@ -3,9 +3,9 @@
   "display": "standalone",
   "name": "B.C. StockS",
   "orientation": "portrait",
-  "scope": "./index.html?",
+  "scope": "./index.html?page=loginpage",
   "short_name": "B.C. StockS",
-  "start_url": "./index.html",
+  "start_url": "./index.html?page=mainpage",
   "theme_color": "#2a2b38",
   "icons": [
     {
