@@ -1,10 +1,9 @@
 {
   "background_color": "#2a2b38",
   "dir": "ltr",
-  "display": "standalone",
+  "display": "fullscreen",
   "name": "B.C. StockS",
   "orientation": "portrait",
-  "scope": "https://bcstocks.online?page=loginpage/",
   "short_name": "B.C. StockS",
   "start_url": "https://bcstocks.online/",
   "theme_color": "#2a2b38",
