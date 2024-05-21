@@ -1,11 +1,12 @@
 {
   "background_color": "#2a2b38",
   "dir": "ltr",
-  "display": "fullscreen",
+  "display": "standalone",
   "name": "B.C. StockS",
   "orientation": "portrait",
+  "scope": "./index.html?",
   "short_name": "B.C. StockS",
-  "start_url": "https://bcstocks.online/",
+  "start_url": "./index.html",
   "theme_color": "#2a2b38",
   "icons": [
     {
@@ -26,10 +27,11 @@
   ],
   "display_override": [
     "window-controls-overlay",
-    
-    "fullscreen"
+    "standalone"
   ],
   "prefer_related_applications": false,
-  "iarc_rating_id": "10253983"
-  
+  "iarc_rating_id": "10253983",
+  "edge_side_panel": {
+    "preferred_width": 0
+  }
 }
