@@ -4,9 +4,9 @@
   "display": "standalone",
   "name": "B.C. StockS",
   "orientation": "portrait",
-  "scope": "https://bcstocks.online/?page=mainpage",
+  "scope": "./index.html",
   "short_name": "B.C. StockS",
-  "start_url": "https://bcstocks.online/?page=mainpage",
+  "start_url": "./index.html",
   "theme_color": "#2a2b38",
   "icons": [
     {
