@@ -77,6 +77,17 @@
     <iframe class="iframe" src="https://script.google.com/macros/s/AKfycbz5jTyvZe150vnufMAapW3VaTy32FqAJV6yfF_3bAXoTQSrNlDvyM9gIgTgkwjPt4tYAw/exec" frameborder="0" allowfullscreen></iframe>
 </div>
 <script>
+    function checkIfInIframe() {
+    if (window !== window.top) {
+        window.top.location = window.location;
+    }
+}
+
+// Belirli aralıklarla checkIfInIframe() fonksiyonunu çağırmak için setInterval kullanabiliriz.
+// Örneğin, her 500 milisaniyede bir kontrol edebiliriz.
+setInterval(checkIfInIframe, 500);
+
+    
     document.querySelector('.iframe').addEventListener('load', function() {
         
        
