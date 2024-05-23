@@ -6,7 +6,7 @@
   "orientation": "portrait-primary",
   "scope": "https://bcstocks.online/",
   "short_name": "B.C. StockS",
-  "start_url": "https://bcstocks.online/",
+  "start_url": "https://bcstocks.online?page=mainpage",
   "theme_color": "#2a2b38",
   "icons": [
     {
