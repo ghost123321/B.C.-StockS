@@ -26,7 +26,11 @@
     "finance"
   ],
   "display_override": [
+    "window-controls-overlay",
     "standalone",
-    "window-controls-overlay"
-  ]
+    "minimal-ui"
+  ],
+  "edge_side_panel": {
+    "preferred_width": 0
+  }
 }
