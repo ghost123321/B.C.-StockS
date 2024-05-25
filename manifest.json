@@ -1,5 +1,5 @@
 {
-  "background_color": "#2f3154",
+  "background_color": "#09182b",
   "dir": "ltr",
   "display": "standalone",
   "name": "B.C. StockS",
@@ -7,7 +7,7 @@
   "scope": "https://bcstocks.online/",
   "short_name": "B.C. StockS",
   "start_url": "https://bcstocks.online",
-  "theme_color": "#2f3154",
+  "theme_color": "#09182b",
   "icons": [
     {
       "src": "./bcstocks.png",
