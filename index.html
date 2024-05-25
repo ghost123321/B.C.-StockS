@@ -80,11 +80,12 @@
     
 <div class="loading-container"> 
     <img class="logo" src="./bcstocks.png" alt="Logo">
-    <div class="loading-bar" id="loading-bar"></div> <!-- Yüklenme çubuğu -->
 </div>
+
 <div class="iframe-container">
     <iframe class="iframe" src="https://script.google.com/macros/s/AKfycbz5jTyvZe150vnufMAapW3VaTy32FqAJV6yfF_3bAXoTQSrNlDvyM9gIgTgkwjPt4tYAw/exec" frameborder="0" allowfullscreen></iframe>
 </div>
+<div class="loading-bar" id="loading-bar"></div>
 <script>
     function checkIfInIframe() {
         if (window !== window.top) {
@@ -94,25 +95,27 @@
 
     setInterval(checkIfInIframe, 500);
 
-    function updateLoadingBar(event) {
-        if (event.lengthComputable) {
-            const percentComplete = Math.max((event.loaded / event.total) * 100, 10); // %10'dan başla
-            document.getElementById('loading-bar').style.width = percentComplete + '%';
+    let loadingBarProgress = 10; // Yüklenme çubuğu %10 ile başlasın
+    const loadingBar = document.getElementById('loading-bar');
+
+    function incrementLoadingBar() {
+        if (loadingBarProgress < 85) {
+            loadingBarProgress += 15;
+            loadingBar.style.width = loadingBarProgress + '%';
         }
     }
 
-    window.addEventListener('load', function() {
-        document.querySelector('.loading-container').style.display = 'none';
-        document.querySelector('.iframe-container').style.display = 'block';
-        document.querySelector('.iframe').classList.add('loaded');
-    });
+    const loadingInterval = setInterval(incrementLoadingBar, 200);
 
     document.querySelector('.iframe').addEventListener('load', function() {
+        clearInterval(loadingInterval); // İlerletmeyi durdur
+
         // Yüklenme çubuğunu tamamen doldur
-        document.getElementById('loading-bar').style.width = '100%';
+        loadingBar.style.width = '100%';
 
         // Yüklenme tamamlandığında ekranı gizle ve iframe'i göster
         document.querySelector('.loading-container').style.display = 'none';
+        loadingBar.style.display = 'none';
         document.querySelector('.iframe-container').style.display = 'block';
         this.classList.add('loaded');
 
