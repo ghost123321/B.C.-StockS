@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" href="./bcstocks.png" type="image/x-icon" />
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet">
+
 <link rel="manifest" href="./manifest.json" />
 <style>
     body {
@@ -28,26 +29,17 @@
         z-index: 9999;
     }
     .logo {
-        width: 220px;
-        height: 220px;
+        width: 192px; /* veya splash logosunun istediğiniz boyutu */
+        height: 192px; /* veya splash logosunun istediğiniz boyutu */
         animation: pulse 1.5s infinite alternate;
         transform: scale(1.2);
         z-index: 1;
-    }
-    .loading-bar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 10%; /* %10 ile başlat */
-        height: 5px; /* Yüklenme çubuğunun kalınlığı */
-        background-color: gold; /* Altın sarısı renk */
-        z-index: 10000;
-        transition: width 0.25s ease-out;
     }
     @keyframes pulse {
         from { transform: scale(1.1); }
         to { transform: scale(1.5); }
     }
+    
     .iframe-container {
         width: 100%;
         height: 100%;
@@ -80,75 +72,59 @@
     
 <div class="loading-container"> 
     <img class="logo" src="./bcstocks.png" alt="Logo">
-    <div class="loading-bar" id="loading-bar"></div> <!-- Yüklenme çubuğu -->
 </div>
-
 <div class="iframe-container">
     <iframe class="iframe" src="https://script.google.com/macros/s/AKfycbz5jTyvZe150vnufMAapW3VaTy32FqAJV6yfF_3bAXoTQSrNlDvyM9gIgTgkwjPt4tYAw/exec" frameborder="0" allowfullscreen></iframe>
 </div>
 <script>
     function checkIfInIframe() {
-        if (window !== window.top) {
-            window.top.location = window.location;
-        }
+    if (window !== window.top) {
+        window.top.location = window.location;
     }
+}
 
-    setInterval(checkIfInIframe, 500);
+// Belirli aralıklarla checkIfInIframe() fonksiyonunu çağırmak için setInterval kullanabiliriz.
+// Örneğin, her 500 milisaniyede bir kontrol edebiliriz.
+setInterval(checkIfInIframe, 500);
 
-    let loadingBarProgress = 10; // Yüklenme çubuğu %10 ile başlasın
-    const loadingBar = document.getElementById('loading-bar');
-
-    function incrementLoadingBar() {
-        if (loadingBarProgress < 100) {
-            loadingBarProgress += 15;
-            loadingBar.style.width = loadingBarProgress + '%';
-        }
-    }
-
-    const loadingInterval = setInterval(incrementLoadingBar, 200);
-
-    // Sayfa yüklendiğinde çubuğu %100 olarak ayarla
-    window.addEventListener('load', function() {
-        clearInterval(loadingInterval); // İlerletmeyi durdur
-        loadingBar.style.width = '100%';
-        setTimeout(() => {
-            document.querySelector('.loading-container').style.display = 'none';
-            document.querySelector('.loading-bar').style.display = 'none';
-            document.querySelector('.iframe-container').style.display = 'block';
-            document.querySelector('.iframe').classList.add('loaded');
-            changeThemeColor('#464661');
-        }, 100);
-    });
-
+    
     document.querySelector('.iframe').addEventListener('load', function() {
-        // Yükleme tamamlandığında ekranı gizle ve iframe'i göster
+        
+       
         document.querySelector('.loading-container').style.display = 'none';
-        document.querySelector('.loading-bar').style.display = 'none';
         document.querySelector('.iframe-container').style.display = 'block';
-        this.classList.add('loaded');
-        changeThemeColor('#464661');
-    });
+       
 
-    function changeThemeColor(color) {
-        let themeMetaTag = document.querySelector('meta[name="theme-color"]');
-        if (themeMetaTag) {
-            themeMetaTag.setAttribute('content', color);
-        } else {
-            themeMetaTag = document.createElement('meta');
-            themeMetaTag.setAttribute('name', 'theme-color');
-            themeMetaTag.setAttribute('content', color);
-            document.head.appendChild(themeMetaTag);
-        }
-    }
-
+  setTimeout(() => {
+    this.classList.add('loaded');
+    changeThemeColor('#464661'); // Örnek olarak tema rengini turuncu yapalım
+  }, 200);       
+});
+function changeThemeColor(color) {
+  let themeMetaTag = document.querySelector('meta[name="theme-color"]');
+  if (themeMetaTag) {
+    themeMetaTag.setAttribute('content', color);
+  } else {
+    // Eğer meta etiketi yoksa, yeni bir tane oluşturabiliriz
+    themeMetaTag = document.createElement('meta');
+    themeMetaTag.setAttribute('name', 'theme-color');
+    themeMetaTag.setAttribute('content', color);
+    document.head.appendChild(themeMetaTag);
+  }
+}
+        
+    
+</script>
+<script>
+    document.title = "B.C. StockS";
+</script>
+<script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function () {
             navigator.serviceWorker.register('/sw.js?v=3');
         });
     }
 </script>
-<script>
-    document.title = "B.C. StockS";
-</script>
+    
 </body>
 </html>
