@@ -94,13 +94,29 @@
 
     setInterval(checkIfInIframe, 500);
 
+    function updateLoadingBar(event) {
+        if (event.lengthComputable) {
+            const percentComplete = (event.loaded / event.total) * 100;
+            document.getElementById('loading-bar').style.width = percentComplete + '%';
+        }
+    }
+
+    window.addEventListener('load', function() {
+        document.querySelector('.loading-container').style.display = 'none';
+        document.querySelector('.iframe-container').style.display = 'block';
+        document.querySelector('.iframe').classList.add('loaded');
+    });
+
     document.querySelector('.iframe').addEventListener('load', function() {
+        // Yüklenme çubuğunu tamamen doldur
+        document.getElementById('loading-bar').style.width = '100%';
+
         // Yüklenme tamamlandığında ekranı gizle ve iframe'i göster
         document.querySelector('.loading-container').style.display = 'none';
         document.querySelector('.iframe-container').style.display = 'block';
+        this.classList.add('loaded');
 
         setTimeout(() => {
-            this.classList.add('loaded');
             changeThemeColor('#464661');
         }, 200);
     });
@@ -116,16 +132,6 @@
             document.head.appendChild(themeMetaTag);
         }
     }
-
-    function updateLoadingBar() {
-        const loadingBar = document.getElementById('loading-bar');
-        const total = document.querySelector('.iframe').contentWindow.document.body.scrollHeight;
-        const scrolled = document.querySelector('.iframe').contentWindow.scrollY + document.querySelector('.iframe').contentWindow.innerHeight;
-        const percentage = (scrolled / total) * 100;
-        loadingBar.style.width = percentage + '%';
-    }
-
-    window.addEventListener('scroll', updateLoadingBar);
 
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function () {
