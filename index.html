@@ -38,10 +38,10 @@
         position: fixed;
         bottom: 0;
         left: 0;
-        width: 0;
-        height: 150px; /* Yüklenme çubuğunun kalınlığı */
+        width: 10%; /* %10 ile başlat */
+        height: 5px; /* Yüklenme çubuğunun kalınlığı */
         background-color: gold; /* Altın sarısı renk */
-        z-index: 1;
+        z-index: 10000;
         transition: width 0.25s ease-out;
     }
     @keyframes pulse {
@@ -96,7 +96,7 @@
 
     function updateLoadingBar(event) {
         if (event.lengthComputable) {
-            const percentComplete = (event.loaded / event.total) * 100;
+            const percentComplete = Math.max((event.loaded / event.total) * 100, 10); // %10'dan başla
             document.getElementById('loading-bar').style.width = percentComplete + '%';
         }
     }
