@@ -1,102 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="theme-color" content="#09182b" />
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="shortcut icon" href="./bcstocks.png" type="image/x-icon" />
-<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet">
-
-<link rel="manifest" href="./manifest.json" />
-<style>
-    body {
-        margin: 0;
-        overflow: hidden;
-        font-family: 'Open Sans', sans-serif;
-        background-color: #09182b;
-    }
-    .loading-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #09182b;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        transition: opacity 1s ease;
-    }
-    .loading-container.fade-out {
-        opacity: 0;
-        transition: opacity 1s ease;
-    }
-    .logo {
-        width: 192px;
-        height: 192px;
-        animation: pulse 1.5s infinite alternate;
-        transform: scale(1.2);
-        z-index: 1;
-    }
-    @keyframes pulse {
-        from { transform: scale(1.1); }
-        to { transform: scale(1.5); }
-    }
-
-    .loading-line {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 4px; /* Thinner line */
-        background-color: gold;
-        animation: slide 1.5s infinite linear;
-    }
-    @keyframes slide {
-        from {
-            transform: translateX(-100%);
+    <meta name="theme-color" content="#09182b" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./bcstocks.png" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="./manifest.json" />
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Open Sans', sans-serif;
+            background-color: #09182b;
         }
-        to {
-            transform: translateX(100%);
+        .loading-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #09182b;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1s ease;
         }
-    }
-    
-    .iframe-container {
-        width: 100%;
-        height: 100%;
-        display: none;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-    }
-    .iframe {
-        width: 0; /* Start width at 0 for animation */
-        height: 100%;
-        opacity: 0;
-        transition: width 1s ease, opacity 0.5s ease;
-        transform-origin: center;
-    }
-    .iframe.show {
-        width: 100%; /* Expand to full width */
-        opacity: 1;
-    }
-    .mask {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #09182b; /* Same as the body background */
-        transition: width 1s ease;
-        z-index: 10; /* Place above the iframe */
-    }
-    .mask.hide {
-        width: 0; /* Hide mask */
-    }
-</style>
+        .loading-container.fade-out {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .logo {
+            width: 192px;
+            height: 192px;
+            animation: pulse 1.5s infinite alternate;
+            transform: scale(1.2);
+            z-index: 1;
+        }
+        @keyframes pulse {
+            from { transform: scale(1.1); }
+            to { transform: scale(1.5); }
+        }
+        .loading-line {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 4px; /* Thinner line */
+            background-color: gold;
+            animation: slide 1.5s infinite linear;
+        }
+        @keyframes slide {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(100%);
+            }
+        }
+        .iframe-container {
+            width: 100%;
+            height: 100%;
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+        .iframe {
+            width: 0; /* Start width at 0 for animation */
+            height: 100%;
+            opacity: 0;
+            transition: width 1s ease, opacity 0.5s ease;
+            transform-origin: center;
+        }
+        .iframe.show {
+            width: 100%; /* Expand to full width */
+            opacity: 1;
+        }
+        .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #09182b; /* Starting color */
+    z-index: 9998; /* Above loading container and iframe */
+    transition: width 1s ease, transform 1s ease, background-color 1s ease; /* Animate width, transform, and background color */
+    transform: translateX(0); /* Start in original position */
+}
+
+.overlay.hide {
+    transform: translateX(100%); /* Move off the screen to the left */
+    width: 100%; /* Keep full width for the animation */
+    background-color: #464661; /* Ending color */
+}
+    </style>
 </head>
 <body>
     
@@ -104,8 +106,8 @@
     <img class="logo" src="./bcstocks.png" alt="Logo">
     <div class="loading-line"></div> <!-- The animated line -->
 </div>
+<div class="overlay"></div> <!-- The overlay rectangle -->
 <div class="iframe-container">
-    <div class="mask"></div> <!-- The background mask -->
     <iframe class="iframe" src="https://script.google.com/macros/s/AKfycbz5jTyvZe150vnufMAapW3VaTy32FqAJV6yfF_3bAXoTQSrNlDvyM9gIgTgkwjPt4tYAw/exec" frameborder="0" allowfullscreen></iframe>
 </div>
 <script>
@@ -119,28 +121,33 @@
 
     document.querySelector('.iframe').addEventListener('load', function() {
         const loadingContainer = document.querySelector('.loading-container');
+        const overlay = document.querySelector('.overlay');
         const iframeContainer = document.querySelector('.iframe-container');
         const iframe = document.querySelector('.iframe');
-        const mask = document.querySelector('.mask');
         
         setTimeout(() => {
             loadingContainer.classList.add('fade-out'); // Apply fade-out animation
-        }, 3000); // Wait 3 seconds before fading out
+            // Start overlay shrinking animation
+        }, 2000); // Wait 3 seconds before fading out
 
         setTimeout(() => {
             loadingContainer.style.display = 'none'; // Hide the loading container
             iframeContainer.style.display = 'block'; // Show the iframe container
             changeThemeColor('#464661');
-        }, 3500);
+        }, 2500);
         
         setTimeout(() => {
-            mask.classList.add('hide'); // Trigger the mask hiding
             requestAnimationFrame(() => {
                 iframe.classList.add('show'); // Trigger the animation
             });
             changeThemeColor('#464661');
-        }, 3600); // Wait 4 seconds (1 second after fade-out) to hide completely and animate iframe
-
+        }, 3200); // Wait 4 seconds (1 second after fade-out) to hide completely and animate iframe
+        
+        
+        setTimeout(() => {
+           overlay.classList.add('hide');
+        }, 3250);
+        
     });
 
     function changeThemeColor(color) {
