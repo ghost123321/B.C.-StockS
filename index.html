@@ -6,11 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" href="./bcstocks.png" type="image/x-icon" />
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet">
+
 <link rel="manifest" href="./manifest.json" />
 <style>
     body {
         margin: 0;
-        overflow: hidden; /* Hide scrollbar */
+        overflow: hidden;
         font-family: 'Open Sans', sans-serif;
         background-color: #09182b;
     }
@@ -82,6 +83,19 @@
         width: 100%; /* Expand to full width */
         opacity: 1;
     }
+    .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #09182b; /* Same as the body background */
+        transition: width 1s ease;
+        z-index: 10; /* Place above the iframe */
+    }
+    .mask.hide {
+        width: 0; /* Hide mask */
+    }
 </style>
 </head>
 <body>
@@ -91,6 +105,7 @@
     <div class="loading-line"></div> <!-- The animated line -->
 </div>
 <div class="iframe-container">
+    <div class="mask"></div> <!-- The background mask -->
     <iframe class="iframe" src="https://script.google.com/macros/s/AKfycbz5jTyvZe150vnufMAapW3VaTy32FqAJV6yfF_3bAXoTQSrNlDvyM9gIgTgkwjPt4tYAw/exec" frameborder="0" allowfullscreen></iframe>
 </div>
 <script>
@@ -106,11 +121,11 @@
         const loadingContainer = document.querySelector('.loading-container');
         const iframeContainer = document.querySelector('.iframe-container');
         const iframe = document.querySelector('.iframe');
+        const mask = document.querySelector('.mask');
         
         setTimeout(() => {
             loadingContainer.classList.add('fade-out'); // Apply fade-out animation
         }, 3000); // Wait 3 seconds before fading out
-
 
         setTimeout(() => {
             loadingContainer.style.display = 'none'; // Hide the loading container
@@ -119,10 +134,12 @@
         }, 3500);
         
         setTimeout(() => {
+            mask.classList.add('hide'); // Trigger the mask hiding
             requestAnimationFrame(() => {
                 iframe.classList.add('show'); // Trigger the animation
             });
-        }, 3600); // Wait 3.6 seconds to animate iframe
+            changeThemeColor('#464661');
+        }, 3600); // Wait 4 seconds (1 second after fade-out) to hide completely and animate iframe
 
     });
 
