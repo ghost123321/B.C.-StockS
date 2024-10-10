@@ -6,12 +6,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" href="./bcstocks.png" type="image/x-icon" />
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700&display=swap" rel="stylesheet">
-
 <link rel="manifest" href="./manifest.json" />
 <style>
     body {
         margin: 0;
-        overflow: hidden;
+        overflow: hidden; /* Hide scrollbar */
         font-family: 'Open Sans', sans-serif;
         background-color: #09182b;
     }
@@ -66,27 +65,22 @@
         width: 100%;
         height: 100%;
         display: none;
-        border: none;
-        overflow: hidden;
+        position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
     }
     .iframe {
-        position: absolute;
-        width: 100%;
+        width: 0; /* Start width at 0 for animation */
         height: 100%;
-        border: none;
         opacity: 0;
-        transform: scale(0.98);
-        filter: blur(5px);
-        transition: opacity 1s ease, transform 0.5s ease, filter 0.5s ease;
+        transition: width 1s ease, opacity 0.5s ease;
+        transform-origin: center;
     }
-    .iframe.loaded {
+    .iframe.show {
+        width: 100%; /* Expand to full width */
         opacity: 1;
-        transform: scale(1);
-        filter: blur(0);
     }
 </style>
 </head>
@@ -106,22 +100,29 @@
         }
     }
 
-    setInterval(checkIfInIframe, 100);
+    setInterval(checkIfInIframe, 10);
 
     document.querySelector('.iframe').addEventListener('load', function() {
         const loadingContainer = document.querySelector('.loading-container');
         const iframeContainer = document.querySelector('.iframe-container');
+        const iframe = document.querySelector('.iframe');
         
         setTimeout(() => {
             loadingContainer.classList.add('fade-out'); // Apply fade-out animation
         }, 3000); // Wait 3 seconds before fading out
 
+
         setTimeout(() => {
             loadingContainer.style.display = 'none'; // Hide the loading container
-            iframeContainer.style.display = 'block';
-            this.classList.add('loaded');
+            iframeContainer.style.display = 'block'; // Show the iframe container
             changeThemeColor('#464661');
-        }, 4000); // Wait 4 seconds (1 second after fade-out) to hide completely
+        }, 3500);
+        
+        setTimeout(() => {
+            requestAnimationFrame(() => {
+                iframe.classList.add('show'); // Trigger the animation
+            });
+        }, 3600); // Wait 3.6 seconds to animate iframe
 
     });
 
