@@ -138,25 +138,25 @@
         setTimeout(() => {
             loadingContainer.classList.add('fade-out'); // Apply fade-out animation
             // Start overlay shrinking animation
-        }, 3000); // Wait 3 seconds before fading out
+        }, 1000); // Wait 3 seconds before fading out
 
         setTimeout(() => {
             loadingContainer.style.display = 'none'; // Hide the loading container
             iframeContainer.style.display = 'block'; // Show the iframe container
             changeThemeColor('#464661');
-        }, 3300);
+        }, 1300);
         
         setTimeout(() => {
             requestAnimationFrame(() => {
                 iframe.classList.add('show'); // Trigger the animation
             });
             changeThemeColor('#464661');
-        }, 3400); // Wait 4 seconds (1 second after fade-out) to hide completely and animate iframe
+        }, 1400); // Wait 4 seconds (1 second after fade-out) to hide completely and animate iframe
         
         
         setTimeout(() => {
            overlay.classList.add('hide');
-        }, 3500);
+        }, 1500);
         
     });
 
